@@ -31,4 +31,33 @@ public class UserService {
         }
         return null;
     }
+
+    public UserDTO save(UserDTO userDTO){
+        User user = userRepository.save(User.convert(userDTO));
+        return UserDTO.convert(user);
+    }
+
+    public UserDTO delete(Long userId){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent()){
+            userRepository.delete(user.get());
+        }
+        return null;
+    }
+
+    public UserDTO findByCpf(String cpf){
+        User user = userRepository.findByCpf(cpf);
+        if(user != null){
+            return UserDTO.convert(user);
+        }
+        return null;
+    }
+
+    public List<UserDTO> queryByNameLike(String name){
+        List<User> usuarios = userRepository.queryByNameLike(name);
+        return usuarios
+                .stream()
+                .map(UserDTO::convert)
+                .collect(Collectors.toList());
+    }
 }
