@@ -1,8 +1,8 @@
-package com.santana.java.back.end.service;
+package com.santana.java.back.end.application.service;
 
-import com.santana.java.back.end.model.User;
-import com.santana.java.back.end.model.UserDTO;
-import com.santana.java.back.end.repository.UserRepository;
+import com.santana.java.back.end.application.model.User;
+import com.santana.java.back.end.application.model.UserDTO;
+import com.santana.java.back.end.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +44,6 @@ public class UserService {
         }
         return null;
     }
-
     public UserDTO findByCpf(String cpf){
         User user = userRepository.findByCpf(cpf);
         if(user != null){
@@ -52,9 +51,8 @@ public class UserService {
         }
         return null;
     }
-
-    public List<UserDTO> queryByNameLike(String name){
-        List<User> usuarios = userRepository.queryByNameLike(name);
+    public List<UserDTO> queryByNomeLike(String nome){
+        List<User> usuarios = userRepository.queryByNomeLike(nome);
         return usuarios
                 .stream()
                 .map(UserDTO::convert)

@@ -1,0 +1,25 @@
+server:
+    port: 8090
+    servlet:
+        context-path: /app-service
+management:
+    endpoints:
+        web:
+            base-path: /
+            exposure:
+                include: mappings
+    endpoint:
+        metrics:
+            enabled: true
+        prometheus:
+            enabled: true
+spring:
+    jpa:
+        generate-ddl: true
+        hibernate.ddl-auto: update
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+    datasource:
+        url: jdbc:postgresql://localhost:5432/app-service
+        username: postgres
+        password: mike
+        type: com.zaxxer.hikari.HikariDataSource

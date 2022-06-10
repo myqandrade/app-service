@@ -1,6 +1,5 @@
-package com.santana.java.back.end.model;
+package com.santana.java.back.end.application.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,27 +1,25 @@
-package com.santana.java.back.end.controller;
+package com.santana.java.back.end.application.controller;
 
 
-import com.santana.java.back.end.model.UserDTO;
-import com.santana.java.back.end.service.UserService;
+import com.santana.java.back.end.application.model.UserDTO;
+import com.santana.java.back.end.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
-    public List<UserDTO> getUsers(){
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getUsers(){
         List<UserDTO> usuarios = userService.getAll();
-        return usuarios;
+        return ResponseEntity.ok(usuarios);
     }
 
     @GetMapping("/user/id/{id}")
@@ -35,8 +33,8 @@ public class UserController {
     }
 
     @GetMapping("/user/search")
-    public List<UserDTO> queryByName(@RequestParam(name = "nome", required = true) String name){
-        return userService.queryByNameLike(name);
+    public List<UserDTO> queryByName(@RequestParam(name = "nome", required = true) String nome){
+        return userService.queryByNomeLike(nome);
     }
 
     @PostMapping("/newUser")
